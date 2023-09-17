@@ -1,13 +1,13 @@
-package pcf.jjs.project_community_finder_backend;
+package pcf.jjs.project_community_finder_server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProjectCommunityFinderBackendApplication {
+public class ProjectCommunityFinderServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProjectCommunityFinderBackendApplication.class, args);
+		SpringApplication.run(ProjectCommunityFinderServerApplication.class, args);
 	}
 
 }
