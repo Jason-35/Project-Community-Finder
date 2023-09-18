@@ -25,8 +25,7 @@ public class Account {
     private String password;
     private String email;
 
-    public Account(Long id, String username, String password, String email){
-        this.id = id;
+    public Account( String username, String password, String email){
         this.username = username;
         this.password = password;
         this.email = email;
