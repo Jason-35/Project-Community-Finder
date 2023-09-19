@@ -6,6 +6,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+
 
 @Entity
 @Table
@@ -21,9 +24,16 @@ public class Account {
         generator = "user_sequence"
     )
     private Long id;
+
+    @NotEmpty(message = "username cannot be empty")
     private String username;
+    @NotEmpty(message = "password cannot be empty")
     private String password;
+    @Email(message = "must be an email")
+    @NotEmpty(message = "email cannot be empty")
     private String email;
+
+    public Account(){}
 
     public Account( String username, String password, String email){
         this.username = username;
