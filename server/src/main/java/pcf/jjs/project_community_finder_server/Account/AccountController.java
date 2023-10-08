@@ -24,4 +24,9 @@ public class AccountController {
     public  ResponseEntity<Map<String,String>> createAccount(@RequestBody @Valid Account account){
         return new ResponseEntity<>(accountService.createAccount(account), HttpStatus.CREATED);
     }
+
+    @GetMapping
+    public String hello(){
+        return "Hello World";
+    }
 }
