@@ -1,4 +1,4 @@
-package pcf.jjs.project_community_finder_server.Account.advice;
+package pcf.jjs.project_community_finder_server.Users.advice;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
-public class AccountErrorHandling {
+public class UsersErrorHandling {
     /**
      * Handles Validation error. Puts entity fields and error into a map and sends back a Bad_Request code
      * @param ex the error that is thrown by @Valid

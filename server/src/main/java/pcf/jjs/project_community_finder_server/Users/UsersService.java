@@ -1,4 +1,4 @@
-package pcf.jjs.project_community_finder_server.Account;
+package pcf.jjs.project_community_finder_server.Users;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Null;
@@ -14,23 +14,23 @@ import java.util.Map;
 import java.util.Optional;
 
 @Service
-public class AccountService {
-    private final AccountRepository accountRepository;
+public class UsersService {
+    private final UsersRepository usersRepository;
     // Dependency Injection for accountRepository which serves as access to the database
-    public AccountService(AccountRepository accountRepository){
-        this.accountRepository = accountRepository;
+    public UsersService(UsersRepository usersRepository){
+        this.usersRepository = usersRepository;
     }
     // Service for creating new accounts. Need to redo the error for when an account already exist
-    public Map<String, String> createAccount(@Valid Account account){
+    public Map<String, String> createAccount(@Valid Users users){
 
 //        Account newAccount = new Account(account.getUsername(), account.getPassword(), account.getEmail());
 
-        Optional<Account> accountOptional = accountRepository.findAccountByEmail(account.getEmail());
-        if(accountOptional.isPresent()){
+        Optional<Users> usersOptional = usersRepository.findUsersByEmail(users.getEmail());
+        if(usersOptional.isPresent()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
 
-        accountRepository.save(account);
+        usersRepository.save(users);
         Map<String, String> msgMap = new HashMap<>();
         msgMap.put("message","Saved Successfully");
         return msgMap;

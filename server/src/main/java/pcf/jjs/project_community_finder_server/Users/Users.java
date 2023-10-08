@@ -1,4 +1,4 @@
-package pcf.jjs.project_community_finder_server.Account;
+package pcf.jjs.project_community_finder_server.Users;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,7 +12,7 @@ import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table
-public class Account {
+public class Users {
     @Id
     @SequenceGenerator(
         name = "user_sequence",
@@ -33,9 +33,9 @@ public class Account {
     @NotEmpty(message = "email cannot be empty")
     private String email;
 
-    public Account(){}
+    public Users(){}
 
-    public Account( String username, String password, String email){
+    public Users( String username, String password, String email){
         this.username = username;
         this.password = password;
         this.email = email;
