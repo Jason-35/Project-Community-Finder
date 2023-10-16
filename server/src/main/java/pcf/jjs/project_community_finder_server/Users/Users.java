@@ -55,26 +55,16 @@ public class Users {
         return this.frameworks;
     }
 
-    public void addFramework(String framework){
-        this.frameworks.add(framework);
-    }
-
-    public void removeFramework(String framework){
-        int index = this.frameworks.indexOf(framework);
-        this.frameworks.remove(index);
+    public void setFramework(ArrayList<String> framework){
+        this.frameworks = framework;
     }
 
     public ArrayList<String> getLanguages(){
         return this.languages;
     }
 
-    public void addLanguages(String language){
-        this.languages.add(language);
-    }
-
-    public void removeLanguages(String language){
-        int index = this.languages.indexOf(language);
-        this.languages.remove(index);
+    public void setLanguages(ArrayList<String> language){
+        this.languages = language;
     }
 
     public String getExperience(){
