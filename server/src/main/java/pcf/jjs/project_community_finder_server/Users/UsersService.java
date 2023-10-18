@@ -1,5 +1,6 @@
 package pcf.jjs.project_community_finder_server.Users;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import pcf.jjs.project_community_finder_server.Users.dto.UserEdit;
 
@@ -47,7 +48,7 @@ public class UsersService {
         Optional<Users> usersOptional = usersRepository.findUsersByEmail(email);
 
         if(usersOptional.isPresent() == false){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            throw new EntityNotFoundException();
         }
 
         Users user = usersOptional.get();
@@ -73,7 +74,7 @@ public class UsersService {
         Optional<Users> usersOptional = usersRepository.findUsersByEmail(email);
         
         if(usersOptional.isPresent() == false){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            throw new EntityNotFoundException();
         }
 
         Users user = usersOptional.get();

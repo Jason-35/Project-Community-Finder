@@ -10,11 +10,16 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.server.ResponseStatusException;
 
+import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
+
 import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
 public class UsersErrorHandling {
+
+
     /**
      * Handles Validation error. Puts entity fields and error into a map and sends back a Bad_Request code
      * @param ex the error that is thrown by @Valid
@@ -37,18 +42,18 @@ public class UsersErrorHandling {
      * @return error map that gets parsed into json when sent
      */
     @ResponseStatus(HttpStatus.CONFLICT)
-    @ExceptionHandler(ResponseStatusException.class)
+    @ExceptionHandler(EntityExistsException.class)
     public Map<String, String> handleConflictUsername(){
         Map<String, String> errorMap = new HashMap<>();
         errorMap.put("error","Account name already exist");
         return errorMap;
-    }
+    };
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(ResponseStatusException.class)
-    public Map<String, String> handleUserNoneFound(){
+    @ExceptionHandler(EntityNotFoundException.class)
+    public Map<String, String> userNotFound(){
         Map<String, String> errorMap = new HashMap<>();
-        errorMap.put("error","Cannot find the user");
+        errorMap.put("error", "some error");
         return errorMap;
     }
 }
