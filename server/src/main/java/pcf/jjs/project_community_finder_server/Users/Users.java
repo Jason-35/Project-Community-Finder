@@ -1,5 +1,8 @@
 package pcf.jjs.project_community_finder_server.Users;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,6 +35,11 @@ public class Users {
     @Email(message = "must be an email")
     @NotEmpty(message = "email cannot be empty")
     private String email;
+    
+    private String bio;
+    private String experience;
+    private ArrayList<String> languages;
+    private ArrayList<String> frameworks;
 
     public Users(){}
 
@@ -39,6 +47,40 @@ public class Users {
         this.username = username;
         this.password = password;
         this.email = email;
+        this.languages = new ArrayList<String>();
+        this.frameworks = new ArrayList<String>();
+    }
+    
+    public ArrayList<String> getFramework(){
+        return this.frameworks;
+    }
+
+    public void setFramework(ArrayList<String> framework){
+        this.frameworks = framework;
+    }
+
+    public ArrayList<String> getLanguages(){
+        return this.languages;
+    }
+
+    public void setLanguages(ArrayList<String> language){
+        this.languages = language;
+    }
+
+    public String getExperience(){
+        return experience;
+    }
+
+    public void setExperience(String experience){
+        this.experience = experience;
+    }
+
+    public String getBio(){
+        return bio;
+    }
+
+    public void setBio(String bio){
+        this.bio = bio;
     }
 
     public Long getId() {
@@ -81,6 +123,7 @@ public class Users {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
+                ", bio='" + bio + '\'' +
                 '}';
     }
 }
