@@ -1,4 +1,4 @@
-package pcf.jjs.project_community_finder_server.Users.advice;
+package pcf.jjs.project_community_finder_server.Users.errorHandling;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -53,7 +53,7 @@ public class UsersErrorHandling {
     @ExceptionHandler(EntityNotFoundException.class)
     public Map<String, String> userNotFound(){
         Map<String, String> errorMap = new HashMap<>();
-        errorMap.put("error", "some error");
+        errorMap.put("error", "User not found");
         return errorMap;
     }
 }
