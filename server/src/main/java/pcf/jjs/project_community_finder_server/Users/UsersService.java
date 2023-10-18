@@ -1,18 +1,13 @@
 package pcf.jjs.project_community_finder_server.Users;
 
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Null;
 import pcf.jjs.project_community_finder_server.Users.dto.UserEdit;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -20,16 +15,20 @@ import java.util.Optional;
 @Service
 public class UsersService {
     private final UsersRepository usersRepository;
-    // Dependency Injection for accountRepository which serves as access to the database
+
     public UsersService(UsersRepository usersRepository){
         this.usersRepository = usersRepository;
     }
-
-    // Service for creating new accounts. Need to redo the error for when an account already exist
+    /**
+     * Service for creating an account and storing it in the database
+     * Searches the user repository to check is
+     * @param users a valid user entity
+     * @return a map of type <String, String> if the creation of user is successful
+     */
     public Map<String, String> createAccount(@Valid Users users){
         Optional<Users> usersOptional = usersRepository.findUsersByEmail(users.getEmail());
         if(usersOptional.isPresent()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.CONFLICT);
         }
 
         usersRepository.save(users);
@@ -38,8 +37,19 @@ public class UsersService {
         return msgMap;
     }
 
+    /**
+     * Service for getting the user's current setting. 
+     * User's repository is queried and stored each field into a map of String and Object
+     * @param email used to find the current user's repository
+     * @return a Map of type <String, Object>
+     */
     public Map<String, Object> getUserSettings(String email){
         Optional<Users> usersOptional = usersRepository.findUsersByEmail(email);
+
+        if(usersOptional.isPresent() == false){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
         Users user = usersOptional.get();
         Map<String, Object> userMap = new HashMap<>();
 
@@ -52,8 +62,20 @@ public class UsersService {
         return userMap;
     }
 
+    /**
+     * Service for editing the user's setting
+     * 
+     * @param email the email used to get the user's repository
+     * @param editBody an dto object containing the data that will be changed
+     * @return a map with success if everything is valid
+     */
     public Map<String, String> editUserSetting(String email, UserEdit editBody){
         Optional<Users> usersOptional = usersRepository.findUsersByEmail(email);
+        
+        if(usersOptional.isPresent() == false){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
         Users user = usersOptional.get();
 
         if (editBody.bio != null){

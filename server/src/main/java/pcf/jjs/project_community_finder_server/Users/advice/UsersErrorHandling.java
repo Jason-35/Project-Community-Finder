@@ -44,4 +44,11 @@ public class UsersErrorHandling {
         return errorMap;
     }
 
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(ResponseStatusException.class)
+    public Map<String, String> handleUserNoneFound(){
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("error","Cannot find the user");
+        return errorMap;
+    }
 }
