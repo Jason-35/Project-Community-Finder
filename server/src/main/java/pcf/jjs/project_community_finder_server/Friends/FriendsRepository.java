@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FriendsRepository extends JpaRepository<Friends, Long>{
-    Optional<Friends> findFriendsByEmail(String email);    
+    // Optional<Friends> findFriendsByEmail(String email);    
 }

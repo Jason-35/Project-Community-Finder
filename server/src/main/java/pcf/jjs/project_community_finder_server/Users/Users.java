@@ -41,6 +41,8 @@ public class Users {
     private ArrayList<String> languages;
     private ArrayList<String> frameworks;
 
+    // private ArrayList<Users> friends;
+
     public Users(){}
 
     public Users( String username, String password, String email){
