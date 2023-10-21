@@ -2,15 +2,19 @@ package pcf.jjs.project_community_finder_server.Users;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import pcf.jjs.project_community_finder_server.FriendRequest.FriendRequest;
 
 
 @Entity
@@ -41,6 +45,9 @@ public class Users {
     private ArrayList<String> languages;
     private ArrayList<String> frameworks;
 
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
+    private List<FriendRequest> sentFriendRequest;
+
     // private ArrayList<Users> friends;
 
     public Users(){}
@@ -51,6 +58,7 @@ public class Users {
         this.email = email;
         this.languages = new ArrayList<String>();
         this.frameworks = new ArrayList<String>();
+        this.sentFriendRequest = new ArrayList<>();
     }
     
     public ArrayList<String> getFramework(){
