@@ -1,6 +1,12 @@
 package pcf.jjs.project_community_finder_server.FriendRequest;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+
+import javax.swing.text.html.Option;
 
 import org.springframework.stereotype.Service;
 
@@ -24,12 +30,25 @@ public class FriendRequestService {
         Optional<Users> senderOptional = usersRepository.findUsersByEmail(sender);
         Optional<Users> receiverOptional = usersRepository.findUsersByEmail(receiver);
         
-        // System.out.println(senderOptional.get().getEmail());
-
         FriendRequest request = new FriendRequest(senderOptional.get(), receiverOptional.get());
         friendRequestRepository.save(request);
 
         return "request sent";
+    }
+
+    public Map<String, Object> getAllFriendRequest(String reciever){
+        Optional<List<String>> fr = friendRequestRepository.findAllByReceiverEmail(reciever);
+        System.out.println(fr.get().get(0));
+        System.out.println(fr.get().get(1));
+        Map<String, Object> responseData = new HashMap<>();
+        List<String> listOfSender = fr.get();
+        responseData.put("senders", listOfSender);
+        return responseData;
+    }
+
+    public String friendRequestResponse(String sender, String reciever, String response){
+
+        return response;
     }
 
 }
