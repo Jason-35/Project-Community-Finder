@@ -20,23 +20,24 @@ import pcf.jjs.project_community_finder_server.FriendRequest.FriendRequest;
 @Entity
 @Table
 public class Users {
-    @Id
-    @SequenceGenerator(
-        name = "user_sequence",
-        sequenceName = "user_sequence",
-        allocationSize = 1
-    )
-    @GeneratedValue(
-        strategy = GenerationType.SEQUENCE,
-        generator = "user_sequence"
-    )
-    private Long id;
+    // @SequenceGenerator(
+    //     name = "user_sequence",
+    //     sequenceName = "user_sequence",
+    //     allocationSize = 1
+    // )
+    // @GeneratedValue(
+    //     strategy = GenerationType.SEQUENCE,
+    //     generator = "user_sequence"
+    // )
+    // private Long id;
 
     @NotEmpty(message = "username cannot be empty")
     private String username;
     @NotEmpty(message = "password cannot be empty")
     private String password;
     @Email(message = "must be an email")
+
+    @Id
     @NotEmpty(message = "email cannot be empty")
     private String email;
     
@@ -48,7 +49,6 @@ public class Users {
     @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
     private List<FriendRequest> sentFriendRequest;
 
-    // private ArrayList<Users> friends;
 
     public Users(){}
 
@@ -59,6 +59,14 @@ public class Users {
         this.languages = new ArrayList<String>();
         this.frameworks = new ArrayList<String>();
         this.sentFriendRequest = new ArrayList<>();
+    }
+
+    public void setSentFriendRequest(List<FriendRequest> sentFriendRequests){
+        this.sentFriendRequest = sentFriendRequests;
+    }
+
+    public List<FriendRequest> getSentFriendRequest(){
+        return this.sentFriendRequest;
     }
     
     public ArrayList<String> getFramework(){
@@ -93,13 +101,13 @@ public class Users {
         this.bio = bio;
     }
 
-    public Long getId() {
-        return id;
-    }
+    // public Long getId() {
+    //     return id;
+    // }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    // public void setId(Long id) {
+    //     this.id = id;
+    // }
 
     public String getUsername() {
         return username;
@@ -129,7 +137,6 @@ public class Users {
     @Override
     public String toString() {
         return "Account{" +
-                "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
