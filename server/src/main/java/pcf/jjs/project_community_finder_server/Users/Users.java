@@ -35,8 +35,8 @@ public class Users {
     private String username;
     @NotEmpty(message = "password cannot be empty")
     private String password;
+    
     @Email(message = "must be an email")
-
     @Id
     @NotEmpty(message = "email cannot be empty")
     private String email;

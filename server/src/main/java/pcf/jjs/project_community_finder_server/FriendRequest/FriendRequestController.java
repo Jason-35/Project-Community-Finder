@@ -2,6 +2,7 @@ package pcf.jjs.project_community_finder_server.FriendRequest;
 
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import pcf.jjs.project_community_finder_server.FriendRequest.dto.FriendRequestDTO;
 import pcf.jjs.project_community_finder_server.Users.Users;
@@ -34,5 +36,18 @@ public class FriendRequestController {
     public Map<String, Object> getAllFriendRequest(@RequestParam String receiverEmail){
         System.out.println(receiverEmail);
         return friendRequestService.getAllFriendRequest(receiverEmail);
+    }
+
+    @PostMapping(path = "accept")
+    public String acceptFriendRequest(String sender, String receiver){
+        return friendRequestService.friendRequestResponse(sender, receiver, "accept");
+    }
+
+    @Transactional
+    @DeleteMapping(path = "decline")
+    public String declineFriendRequest(@RequestParam String sender, @RequestParam String receiver){
+        // return friendRequestService.friendRequestResponse(sender, receiver, "decline");
+       friendRequestService.friendRequestResponse(sender, receiver, "decline");
+        return "Crazy";
     }
 }

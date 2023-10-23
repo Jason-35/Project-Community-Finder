@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Auth0Provider domain={domain} clientId={clientId} authorizationParams={{
       redirect_uri: window.location.origin,
-      audience: `https://${domain}/api/v2/`,
+      audience: `https://project-community-finder/api/`,
       scope: "openid profile email"
     }}>
 

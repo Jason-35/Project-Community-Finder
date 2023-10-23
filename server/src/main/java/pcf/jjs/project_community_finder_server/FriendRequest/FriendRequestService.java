@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import javax.swing.text.html.Option;
 
 import org.springframework.stereotype.Service;
 
@@ -48,7 +47,16 @@ public class FriendRequestService {
     }
 
     public String friendRequestResponse(String sender, String receiver, String response){        
-        return response;
+        if(response.equalsIgnoreCase("decline")){
+            // friendRequestRepository.deleteBySenderAndReceiver(sender, receiver);
+            // friendRequestRepository.deleteAll();
+            // Long f = (long) 1;
+            // friendRequestRepository.deleteById((long) 1);
+            friendRequestRepository.testDel();
+            // friendRequestRepository.delete(null);
+            // System.out.println("halla");
+        }
+        return "decline ok";
     }
 
 }
