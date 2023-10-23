@@ -25,8 +25,6 @@ public class FriendRequestService {
 
 
     public String sendFriendRequest(String sender, String receiver){
-        System.out.println(sender);
-        System.out.println(receiver);
         Optional<Users> senderOptional = usersRepository.findUsersByEmail(sender);
         Optional<Users> receiverOptional = usersRepository.findUsersByEmail(receiver);
         
@@ -36,18 +34,20 @@ public class FriendRequestService {
         return "request sent";
     }
 
-    public Map<String, Object> getAllFriendRequest(String reciever){
-        Optional<List<String>> fr = friendRequestRepository.findAllByReceiverEmail(reciever);
-        System.out.println(fr.get().get(0));
-        System.out.println(fr.get().get(1));
+    /**
+     * Gets a list of emails that send a friend request to the receiver
+     * @param reciever the user who is recieving the friend request's email
+     * @return a list of emails from sender to the reciever
+     */
+    public Map<String, Object> getAllFriendRequest(String receiver){
+        Optional<List<String>> fr = friendRequestRepository.findAllByReceiverEmail(receiver);
         Map<String, Object> responseData = new HashMap<>();
         List<String> listOfSender = fr.get();
         responseData.put("senders", listOfSender);
         return responseData;
     }
 
-    public String friendRequestResponse(String sender, String reciever, String response){
-
+    public String friendRequestResponse(String sender, String receiver, String response){        
         return response;
     }
 
