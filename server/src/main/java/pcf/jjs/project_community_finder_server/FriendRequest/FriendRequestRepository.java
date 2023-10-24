@@ -22,5 +22,4 @@ public interface FriendRequestRepository extends JpaRepository<FriendRequest, Lo
     @Query("DELETE FROM FriendRequest r WHERE r.sender.email = :sender AND r.receiver.email = :receiver")
     void deleteBySenderAndReceiver(@Param("sender") String sender, @Param("receiver") String receiver);
     
-    // void 
 }

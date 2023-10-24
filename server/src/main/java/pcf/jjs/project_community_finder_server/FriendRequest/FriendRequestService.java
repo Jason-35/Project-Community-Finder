@@ -50,14 +50,12 @@ public class FriendRequestService {
 
 
     public String friendRequestResponse(String sender, String receiver, String response){        
-        // if(response.equalsIgnoreCase("decline")){
-            //     friendRequestRepository.deleteBySenderAndReceiver(sender, receiver);
-            // }
+        if(response.equalsIgnoreCase("decline")){
+                friendRequestRepository.deleteBySenderAndReceiver(sender, receiver);
+            }
             
         if(response.equalsIgnoreCase("accept")){
-            // System.out.println(sender);
-            // System.out.println(receiver);
-
+            
             Users senderUser = usersRepository.findUsersByEmail(sender).get();
             Users receiverUser = usersRepository.findUsersByEmail(receiver).get();
 

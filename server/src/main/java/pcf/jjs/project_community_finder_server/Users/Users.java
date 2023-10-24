@@ -20,8 +20,6 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import pcf.jjs.project_community_finder_server.FriendRequest.FriendRequest;
-// import pcf.jjs.project_community_finder_server.Friends.Friends;
-
 
 @Entity
 @Table
@@ -115,14 +113,6 @@ public class Users {
     public void setBio(String bio){
         this.bio = bio;
     }
-
-    // public Long getId() {
-    //     return id;
-    // }
-
-    // public void setId(Long id) {
-    //     this.id = id;
-    // }
 
     public String getUsername() {
         return username;
