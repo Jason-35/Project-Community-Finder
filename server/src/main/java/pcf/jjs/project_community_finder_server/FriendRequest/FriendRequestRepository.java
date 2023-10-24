@@ -17,10 +17,10 @@ public interface FriendRequestRepository extends JpaRepository<FriendRequest, Lo
     @Query("SELECT r.sender.email FROM FriendRequest r WHERE r.receiver.email = :email")
     Optional<List<String>> findAllByReceiverEmail(@Param("email") String receiverEmail);
     
+    @Transactional
+    @Modifying
     @Query("DELETE FROM FriendRequest r WHERE r.sender.email = :sender AND r.receiver.email = :receiver")
     void deleteBySenderAndReceiver(@Param("sender") String sender, @Param("receiver") String receiver);
     
-    @Modifying
-    @Query("DELETE FROM FriendRequest")
-    void testDel();
+    // void 
 }

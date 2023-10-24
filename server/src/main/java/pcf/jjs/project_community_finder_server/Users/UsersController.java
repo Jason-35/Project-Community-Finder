@@ -46,4 +46,14 @@ public class UsersController {
         return "deleted";
     }
 
+    @GetMapping(path = "/getFriends")
+    public String getUsersFriend(){
+        return "not implemented";
+    }
+
+    @DeleteMapping(path = "/removeFriend")
+    public String deleteUSersFriend(){
+        return "not implemented";
+    }
+
 }
