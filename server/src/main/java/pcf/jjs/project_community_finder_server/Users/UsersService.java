@@ -102,4 +102,10 @@ public class UsersService {
         msgMap.put("message","Success");
         return msgMap;
     }
+
+    public String deleteUser(String email){
+        // usersRepository.deleteUsersByEmail(email);
+        usersRepository.deleteAll();
+        return "Deleted";
+    }
 }

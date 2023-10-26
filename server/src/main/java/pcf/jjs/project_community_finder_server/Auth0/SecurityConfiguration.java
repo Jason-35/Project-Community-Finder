@@ -29,7 +29,6 @@ public class SecurityConfiguration {
                         .requestMatchers("/auth0/private").hasAuthority("SCOPE_delete:friend_request")
                         .requestMatchers("/api/friendRequest/**").authenticated()
                         .requestMatchers("/api/account/**").authenticated()
-
                 )
                 .oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()));
         return http.build();
