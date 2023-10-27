@@ -35,4 +35,4 @@ build/
 
 #Project properties
 *.properties
-application.properties
+application.propertiesapi
