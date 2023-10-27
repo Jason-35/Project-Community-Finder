@@ -1,0 +1,21 @@
+.page-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  height: 100%;
+  width: 100%;
+}
+
+.page-layout-content {
+  flex: 1;
+  flex-basis: auto;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+
+  /* needed to move content below navbar */
+  margin-top: 8rem;
+ 
+}
+
