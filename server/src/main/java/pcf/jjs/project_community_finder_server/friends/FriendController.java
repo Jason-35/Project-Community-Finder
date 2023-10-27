@@ -22,8 +22,8 @@ public class FriendController {
 
 
     @GetMapping("/getFriends")
-    public String test(@RequestParam String email){
-        friendService.getFriendsUsernames(email);
-        return "Fire";
+    public List<String> test(@RequestParam String email){
+        return friendService.getFriendsUsernames(email);
+        
     }
 }

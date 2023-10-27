@@ -18,11 +18,8 @@ public class FriendService {
         this.friendRepository = friendRepository;
     }
     
-    public String getFriendsUsernames(String email){
-        // Optional<Users> usr = usersRepository.findUsersByEmail(email);
-        Users usersFriends = friendRepository.findUserFriends(email);
-        System.out.println(usersFriends.getUsername());
-        // return usr.get().getFriendsUsername();
-        return "pow";
+    public List<String> getFriendsUsernames(String email){
+        List<String> usr = friendRepository.findUserFriends(email);
+        return usr;
     }
 }

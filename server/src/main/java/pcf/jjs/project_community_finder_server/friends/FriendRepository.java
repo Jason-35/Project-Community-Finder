@@ -12,6 +12,6 @@ import pcf.jjs.project_community_finder_server.Users.Users;
 @Repository
 public interface FriendRepository extends JpaRepository<Users, String> {
 
-    @Query("SELECT u1.username FROM Users u1 WHERE u1.email = :userEmail")
-    Users findUserFriends(@Param("userEmail") String userEmail);
+    @Query("SELECT u2.username FROM Users u1 JOIN u1.friends u2 WHERE u1.email = :userEmail")
+    List<String> findUserFriends(@Param("userEmail") String userEmail);
 }
