@@ -2,13 +2,18 @@ package pcf.jjs.project_community_finder_server.Users;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -16,27 +21,16 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import pcf.jjs.project_community_finder_server.FriendRequest.FriendRequest;
 
-
 @Entity
 @Table
 public class Users {
-    // @SequenceGenerator(
-    //     name = "user_sequence",
-    //     sequenceName = "user_sequence",
-    //     allocationSize = 1
-    // )
-    // @GeneratedValue(
-    //     strategy = GenerationType.SEQUENCE,
-    //     generator = "user_sequence"
-    // )
-    // private Long id;
 
     @NotEmpty(message = "username cannot be empty")
     private String username;
     @NotEmpty(message = "password cannot be empty")
     private String password;
+    
     @Email(message = "must be an email")
-
     @Id
     @NotEmpty(message = "email cannot be empty")
     private String email;
@@ -49,6 +43,12 @@ public class Users {
     @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
     private List<FriendRequest> sentFriendRequest;
 
+    // @ManyToMany(mappedBy = "user1", cascade = CascadeType.ALL)
+    // private List<Friends> friends;
+
+    @ManyToMany
+    @JoinTable(name = "friends", joinColumns = @JoinColumn(name = "user_email"), inverseJoinColumns = @JoinColumn(name = "friend_email"))
+    private List<Users> friends;
 
     public Users(){}
 
@@ -59,6 +59,27 @@ public class Users {
         this.languages = new ArrayList<String>();
         this.frameworks = new ArrayList<String>();
         this.sentFriendRequest = new ArrayList<>();
+        this.friends = new ArrayList<>();
+    }
+
+    public List<Users> getFriends(){
+        return this.friends;
+    }
+
+    public List<String> getFriendsUsername(){
+        List<String> friendsUsername = new ArrayList<>();
+        for(Users u : this.friends){
+            friendsUsername.add(u.username);
+        }            
+        return friendsUsername;
+    }
+
+    public void addFriend(Users friend){
+        this.friends.add(friend);
+    }
+
+    public void removeFriend(Users friend){
+        System.out.println("remove a friend");
     }
 
     public void setSentFriendRequest(List<FriendRequest> sentFriendRequests){
@@ -100,14 +121,6 @@ public class Users {
     public void setBio(String bio){
         this.bio = bio;
     }
-
-    // public Long getId() {
-    //     return id;
-    // }
-
-    // public void setId(Long id) {
-    //     this.id = id;
-    // }
 
     public String getUsername() {
         return username;

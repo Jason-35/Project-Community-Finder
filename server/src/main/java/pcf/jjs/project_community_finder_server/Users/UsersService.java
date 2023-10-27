@@ -52,6 +52,7 @@ public class UsersService {
         }
 
         Users user = usersOptional.get();
+        // System.out.println(user.getEmail());
         Map<String, Object> userMap = new HashMap<>();
 
         userMap.put("email", user.getEmail());
@@ -101,5 +102,11 @@ public class UsersService {
         Map<String, String> msgMap = new HashMap<>();
         msgMap.put("message","Success");
         return msgMap;
+    }
+
+    public String deleteUser(String email){
+        // usersRepository.deleteUsersByEmail(email);
+        usersRepository.deleteAll();
+        return "Deleted";
     }
 }

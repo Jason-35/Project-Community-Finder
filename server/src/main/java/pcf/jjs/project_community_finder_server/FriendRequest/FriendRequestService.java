@@ -6,15 +6,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import javax.swing.text.html.Option;
-
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import pcf.jjs.project_community_finder_server.Users.Users;
 import pcf.jjs.project_community_finder_server.Users.UsersRepository;
 
 @Service
+@Transactional
 public class FriendRequestService {
     private final FriendRequestRepository friendRequestRepository;
     private final UsersRepository usersRepository;
@@ -43,12 +44,32 @@ public class FriendRequestService {
         Optional<List<String>> fr = friendRequestRepository.findAllByReceiverEmail(receiver);
         Map<String, Object> responseData = new HashMap<>();
         List<String> listOfSender = fr.get();
+        System.out.println(listOfSender.size());
+        System.out.println("ASDasdojasfnsladdnsladfnlkasdnfmkjdsnksjfank");
         responseData.put("senders", listOfSender);
         return responseData;
     }
 
+
     public String friendRequestResponse(String sender, String receiver, String response){        
-        return response;
+        if(response.equalsIgnoreCase("decline")){
+                friendRequestRepository.deleteBySenderAndReceiver(sender, receiver);
+            }
+            
+        if(response.equalsIgnoreCase("accept")){
+            
+            Users senderUser = usersRepository.findUsersByEmail(sender).get();
+            Users receiverUser = usersRepository.findUsersByEmail(receiver).get();
+
+            receiverUser.addFriend(senderUser);
+            senderUser.addFriend(receiverUser);
+
+            usersRepository.save(receiverUser);
+            usersRepository.save(senderUser);
+
+            friendRequestRepository.deleteBySenderAndReceiver(sender, receiver);   
+        }
+        return "ok";
     }
 
 }
