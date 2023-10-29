@@ -1,4 +1,4 @@
-package pcf.jjs.project_community_finder_server.friends;
+package pcf.jjs.project_community_finder_server.Friends;
 
 import java.util.List;
 
