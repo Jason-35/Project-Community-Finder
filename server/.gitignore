@@ -31,7 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
-./*.http
+*.http
+
 
 #Project properties
 *.properties
