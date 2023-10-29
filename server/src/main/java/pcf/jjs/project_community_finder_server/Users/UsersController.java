@@ -43,11 +43,6 @@ public class UsersController {
 
     }
 
-    @GetMapping(path = "/test")
-    public String test(){
-        return "this";
-    }
-
     @DeleteMapping(path = "/delete")
     public String deleteUser(String email) {
         usersService.deleteUser(email);

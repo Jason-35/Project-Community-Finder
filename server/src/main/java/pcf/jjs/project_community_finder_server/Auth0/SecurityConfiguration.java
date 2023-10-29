@@ -26,7 +26,7 @@ public class SecurityConfiguration {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/auth0/public").permitAll()
-                        .requestMatchers("/auth0/private").authenticated()
+                        .requestMatchers("/auth0/private").hasAuthority("SCOPE_delete:friend_request")
                         .requestMatchers("/api/friendRequest/**").authenticated()
                         .requestMatchers("/api/account/**").authenticated()
                         .requestMatchers("/api/friends/**").authenticated()

@@ -65,7 +65,7 @@ public class Users {
     public List<Users> getFriends(){
         return this.friends;
     }
-
+  
     public List<String> getFriendsUsername(){
         List<String> friendsUsername = new ArrayList<>();
         for(Users u : this.friends){
