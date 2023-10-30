@@ -16,7 +16,7 @@ public class Auth0TestController {
         return ResponseEntity.ok(new ResponseDTO("Public Endpoint Working fine !"));
     }
 
-    @DeleteMapping(value = "/private")
+    @GetMapping(value = "/private")
     public ResponseEntity<ResponseDTO> privateEndpoint() {
 
         return ResponseEntity.ok(new ResponseDTO("Private Endpoint Working fine !"));
