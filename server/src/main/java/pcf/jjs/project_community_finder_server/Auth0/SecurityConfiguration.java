@@ -30,6 +30,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/api/friendRequest/**").authenticated()
                         .requestMatchers("/api/account/**").authenticated()
                         .requestMatchers("/api/friends/**").authenticated()
+                        .requestMatchers("/api/room/**").authenticated()
                 )
                 .oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()));
         return http.build();

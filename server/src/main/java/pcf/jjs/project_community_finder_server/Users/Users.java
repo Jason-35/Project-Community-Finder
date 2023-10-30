@@ -20,6 +20,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import pcf.jjs.project_community_finder_server.FriendRequest.FriendRequest;
+import pcf.jjs.project_community_finder_server.Room.Room;
 
 @Entity
 @Table
@@ -50,6 +51,9 @@ public class Users {
     @JoinTable(name = "friends", joinColumns = @JoinColumn(name = "user_email"), inverseJoinColumns = @JoinColumn(name = "friend_email"))
     private List<Users> friends;
 
+    @OneToMany(mappedBy = "roomOwner", cascade = CascadeType.ALL)
+    private List<Room> rooms;
+
     public Users(){}
 
     public Users( String username, String password, String email){
@@ -60,6 +64,10 @@ public class Users {
         this.frameworks = new ArrayList<String>();
         this.sentFriendRequest = new ArrayList<>();
         this.friends = new ArrayList<>();
+    }
+
+    public List<Room> getRooms(){
+        return this.rooms;
     }
 
     public List<Users> getFriends(){

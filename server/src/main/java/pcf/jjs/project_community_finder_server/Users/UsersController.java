@@ -3,7 +3,6 @@ package pcf.jjs.project_community_finder_server.Users;
 import jakarta.validation.Valid;
 import pcf.jjs.project_community_finder_server.Users.dto.UserEdit;
 
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +39,6 @@ public class UsersController {
     public ResponseEntity<Map<String, String>> editUserSetting(@RequestParam String user,
             @RequestBody UserEdit editRequest) {
         return new ResponseEntity<>(usersService.editUserSetting(user, editRequest), HttpStatus.OK);
-
     }
 
     @DeleteMapping(path = "/delete")
