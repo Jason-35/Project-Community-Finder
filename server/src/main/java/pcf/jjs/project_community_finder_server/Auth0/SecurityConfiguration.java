@@ -29,6 +29,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/auth0/private").permitAll()
                         .requestMatchers("/api/friendRequest/**").authenticated()
                         .requestMatchers("/api/account/**").authenticated()
+                        .requestMatchers("/api/friends/**").authenticated()
                 )
                 .oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()));
         return http.build();

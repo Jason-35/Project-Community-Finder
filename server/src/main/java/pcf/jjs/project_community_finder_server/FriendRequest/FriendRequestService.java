@@ -44,6 +44,8 @@ public class FriendRequestService {
         Optional<List<String>> fr = friendRequestRepository.findAllByReceiverEmail(receiver);
         Map<String, Object> responseData = new HashMap<>();
         List<String> listOfSender = fr.get();
+        System.out.println(listOfSender.size());
+        System.out.println("ASDasdojasfnsladdnsladfnlkasdnfmkjdsnksjfank");
         responseData.put("senders", listOfSender);
         return responseData;
     }

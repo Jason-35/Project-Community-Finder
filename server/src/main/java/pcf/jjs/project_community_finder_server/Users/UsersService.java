@@ -52,6 +52,7 @@ public class UsersService {
         }
 
         Users user = usersOptional.get();
+        // System.out.println(user.getEmail());
         Map<String, Object> userMap = new HashMap<>();
 
         userMap.put("email", user.getEmail());
