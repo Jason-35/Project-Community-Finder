@@ -1,7 +1,9 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 import axios from "axios";
-const Profile = () => {
+import { PageLayout } from "../components/PageLayout";
+
+const ProfilePage = () => {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [token, setToken] = useState<string>();
 
@@ -40,12 +42,13 @@ const Profile = () => {
   }, [getAccessTokenSilently, isAuthenticated]);
 
   return (
-    <>
+    <PageLayout>
+      {!isAuthenticated && <div>Please sign in</div>}
       {isAuthenticated && (
         <article className="column">Hello {user?.name}</article>
       )}
-    </>
+    </PageLayout>
   );
 };
 
-export default Profile;
+export default ProfilePage;

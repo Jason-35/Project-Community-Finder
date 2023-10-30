@@ -12,7 +12,11 @@ const LoginButton = () => {
   };
 
   return (
-    !isAuthenticated && <button onClick={() => handleLogin()}>Log in</button>
+    !isAuthenticated && (
+      <button className="button-logout " onClick={() => handleLogin()}>
+        Log in
+      </button>
+    )
   );
 };
 
