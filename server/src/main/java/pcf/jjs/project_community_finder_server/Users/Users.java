@@ -47,7 +47,7 @@ public class Users {
     // private List<Friends> friends;
 
     @ManyToMany
-    @JoinTable(name = "friendships", joinColumns = @JoinColumn(name = "user_email"), inverseJoinColumns = @JoinColumn(name = "friend_email"))
+    @JoinTable(name = "friends", joinColumns = @JoinColumn(name = "user_email"), inverseJoinColumns = @JoinColumn(name = "friend_email"))
     private List<Users> friends;
 
     public Users(){}
@@ -64,6 +64,14 @@ public class Users {
 
     public List<Users> getFriends(){
         return this.friends;
+    }
+  
+    public List<String> getFriendsUsername(){
+        List<String> friendsUsername = new ArrayList<>();
+        for(Users u : this.friends){
+            friendsUsername.add(u.username);
+        }            
+        return friendsUsername;
     }
 
     public void addFriend(Users friend){

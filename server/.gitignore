@@ -32,6 +32,10 @@ build/
 ### VS Code ###
 .vscode/
 *.http
+<<<<<<< HEAD
+=======
+
+>>>>>>> 80da7f11b70917d637e4d3720cfee038a70765e2
 
 #Project properties
 *.properties
